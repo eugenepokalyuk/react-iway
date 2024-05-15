@@ -1,0 +1,22 @@
+.login-row {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.login-card {
+    width: 100%;
+}
+
+.login-title {
+    text-align: center;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.login-card form {
+    min-width: 300px;
+}
