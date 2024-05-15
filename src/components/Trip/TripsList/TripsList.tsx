@@ -59,7 +59,7 @@ const TripsList: React.FC = () => {
         {
             title: '',
             key: 'action',
-            render: (text: any, record: any) => (
+            render: (record: any) => (
                 <Button onClick={() => {
                     setSelectedTrip(record);
                     setDetailsVisible(true);
