@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LoginOutlined from '@ant-design/icons/lib/icons/LoginOutlined';
 import { Button, Card, Col, Form, Input, Row, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +47,7 @@ const LoginForm: React.FC = () => {
                             />
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" onClick={handleSubmit} loading={loading} block>Войти</Button>
+                            <Button type="primary" onClick={handleSubmit} loading={loading} block>Войти <LoginOutlined /></Button>
                         </Form.Item>
                     </Form>
                     {error && (

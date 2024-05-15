@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LogoutOutlined from '@ant-design/icons/lib/icons/LogoutOutlined';
 import { Button, Card, Col, Descriptions, Input, Pagination, Row, Spin, Table, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,7 +20,6 @@ const TripsList: React.FC = () => {
     const [selectedTrip, setSelectedTrip] = useState<any | null>(null);
     const [detailsVisible, setDetailsVisible] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    // кол-во отображаемых строк
     const pageSize = 25;
 
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -107,17 +107,20 @@ const TripsList: React.FC = () => {
                         />
                         {loading ? (
                             <Spin size="large" className="loading-spinner" />
+                        ) : filteredTrips.length === 0 ? (
+                            <div className="no-data">
+                                <Typography.Text>Ничего не найдено</Typography.Text>
+                            </div>
                         ) : isMobile ? (
                             <>
                                 <div className="mobile-cards">
                                     {paginatedTrips.map((trip: any) => (
                                         <Card key={trip.order_id} className="trip-card">
                                             <div className='card'>
-                                                <h3 className='card-title'>Поездка</h3>
-                                                <span className='card-tag'>{trip.order_id}</span>
+                                                <h3 className='card-title'>Поездка #{trip.order_id}</h3>
                                             </div>
 
-                                            <Descriptions size="small" bordered className='table-overflow' layout="vertical">
+                                            <Descriptions size="small" bordered className='table-overflow' layout="horizontal">
                                                 <Descriptions.Item label="Имя пассажира">{trip.passengers[0]?.name ? trip.passengers[0]?.name : "Нет данных"}</Descriptions.Item>
                                                 <Descriptions.Item label="Номер пассажира">{trip.passengers[0]?.phone ? trip.passengers[0]?.phone : "Нет данных"}</Descriptions.Item>
                                                 <Descriptions.Item label="Статус">{trip.status ? statusFormatter(trip.status) : "Нет данных"}</Descriptions.Item>
@@ -169,7 +172,7 @@ const TripsList: React.FC = () => {
                 </Col>
             </Row>
             <Button type="primary" onClick={handleLogout} className='logout-button'>
-                Выйти из аккаунта
+                Выйти из аккаунта <LogoutOutlined />
             </Button>
         </div>
     );

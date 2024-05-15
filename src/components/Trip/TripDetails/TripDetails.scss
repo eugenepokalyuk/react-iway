@@ -10,5 +10,8 @@
     overflow-y: auto;
     height: 60vh;
     margin: 16px 0;
-    padding: 0 16px;
+
+    .mt-4 {
+        margin-top: calc(4 * 4px);
+    }
 }

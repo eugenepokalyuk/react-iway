@@ -1,7 +1,11 @@
 :root {
-    --accent-color: #00AD5A;
-    --accent-color-hover: #00c767;
-    --accent-color-text: #fff;
+    --accent-primary-color: #00AD5A;
+    --accent-primary-color-hover: #00c767;
+    --accent-primary-color-text: #fff;
+
+    --accent-secondary-color: #717171;
+    --accent-secondary-color-hover: #717171;
+    --accent-secondary-color-text: #fff;
 }
 
 .xl-container {
@@ -71,11 +75,11 @@
     margin-left: auto;
     margin-right: auto;
 
-    background: var(--accent-color);
-    color: var(--accent-color-text);
+    background: var(--accent-secondary-color);
+    color: var(--accent-secondary-color-text);
 
     &:hover {
-        background: var(--accent-color-hover) !important;
+        background: var(--accent-secondary-color-hover) !important;
     }
 }
 
@@ -111,14 +115,17 @@
         .card-title {
             padding-left: 16px;
         }
+    }
 
-        .card-tag {
-            background: var(--accent-color);
-            color: var(--accent-color-text);
+    .xl-container {
+        padding: 0px;
+    }
 
-            font-size: 0.6rem;
-            border-radius: 4px;
-            padding: 4px;
-        }
+    .trips-row {
+        margin-top: 0px;
+    }
+
+    .logout-button {
+        margin-bottom: 16px;
     }
 }
