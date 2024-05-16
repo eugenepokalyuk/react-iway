@@ -5,7 +5,7 @@
 
     --accent-secondary-color: #717171;
     --accent-secondary-color-hover: #717171;
-    --accent-secondary-color-text: #fff;
+    --accent-secondary-color-text: #999999;
 }
 
 .xl-container {
@@ -27,6 +27,8 @@
 .trips-filter {
     margin-bottom: 20px;
     width: 100%;
+    border-radius: 16px;
+    padding: 16px;
 }
 
 .loading-spinner {
@@ -72,21 +74,26 @@
     display: block;
     width: 100%;
     max-width: 200px;
-    margin-left: auto;
-    margin-right: auto;
 
-    background: var(--accent-secondary-color);
+    background: initial;
     color: var(--accent-secondary-color-text);
+}
 
-    &:hover {
-        background: var(--accent-secondary-color-hover) !important;
+.actionButton {
+    background: initial;
+    color: var(--accent-secondary-color-text);
+}
+
+.ant-table-thead {
+    .ant-table-cell {
+        color: var(--accent-secondary-color-text) !important;
     }
 }
 
 @media (min-width: 768px) {
-    .mobile-cards {
-        display: none;
-    }
+    // .mobile-cards {
+    //     display: none;
+    // }
 
     .pagination {
         margin-top: 24px;
@@ -127,5 +134,9 @@
 
     .logout-button {
         margin-bottom: 16px;
+    }
+
+    .card-header {
+        flex-direction: column-reverse;
     }
 }

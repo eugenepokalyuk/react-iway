@@ -26,7 +26,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ trip, open, onClose }) => {
             <div className='modal-body'>
                 <div>
                     <h3>Системные данные</h3>
-                    <Descriptions size="small" bordered className='table-overflow' layout="horizontal">
+                    <Descriptions size="small" bordered className='table-overflow' layout="vertical">
                         <Descriptions.Item label="Номер заказа">{trip.order_id ? trip.order_id : "Нет данных"}</Descriptions.Item>
                         <Descriptions.Item label="Номер пользователя">{trip.user_id ? trip.user_id : "Нет данных"}</Descriptions.Item>
                         <Descriptions.Item label="Номер транзакция">{trip.transaction ? trip.transaction : "Нет данных"}</Descriptions.Item>
@@ -34,7 +34,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ trip, open, onClose }) => {
                 </div>
 
                 <h3>Даты</h3>
-                <Descriptions size="small" bordered className='table-overflow' layout="horizontal">
+                <Descriptions size="small" bordered className='table-overflow' layout="vertical">
                     <Descriptions.Item label="Дата оформления">{trip.date ? trip.date : "Нет данных"}</Descriptions.Item>
                     <Descriptions.Item label="Дата прибытия">{trip.date_arrival ? trip.date_arrival : "Нет данных"}</Descriptions.Item>
                     <Descriptions.Item label="Дата выезда">{trip.date_departure ? trip.date_departure : "Нет данных"}</Descriptions.Item>
@@ -62,7 +62,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ trip, open, onClose }) => {
                 {trip.driver_data && (
                     <>
                         <h3>Водитель <span className='driver-name'>{trip.driver_data.driver_name}</span></h3>
-                        <Descriptions size="small" bordered className='table-overflow' layout="horizontal">
+                        <Descriptions size="small" bordered className='table-overflow' layout="vertical">
                             <Descriptions.Item label="Номер(-а)">{trip.driver_data.driver_phone ? trip.driver_data.driver_phone : "Нет данных"}</Descriptions.Item>
                             <Descriptions.Item label="Модель авто">{trip.driver_data.driver_car ? trip.driver_data.driver_car : "Нет данных"}</Descriptions.Item>
                             <Descriptions.Item label="Рейтинг">{trip.driver_data.driver_rating ? trip.driver_data.driver_rating : "Нет данных"}</Descriptions.Item>
@@ -82,7 +82,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({ trip, open, onClose }) => {
 
                 <h3>Пассажиры</h3>
                 {trip.passengers && trip.passengers.map((passenger: Passenger, index: number) => (
-                    <Descriptions key={index} size="small" bordered className='table-overflow' layout="horizontal">
+                    <Descriptions key={index} size="small" bordered className='table-overflow' layout="vertical">
                         <Descriptions.Item label="Имя">{passenger.name ? passenger.name : "Нет данных"}</Descriptions.Item>
                         <Descriptions.Item label="Email">{passenger.email ? passenger.email : "Нет данных"}</Descriptions.Item>
                         <Descriptions.Item label="Телефон">{passenger.phone ? passenger.phone : "Нет данных"}</Descriptions.Item>

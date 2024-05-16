@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import LogoutOutlined from '@ant-design/icons/lib/icons/LogoutOutlined';
-import { Button, Card, Col, Descriptions, Input, Pagination, Row, Spin, Table, Typography } from 'antd';
+import { Button, Card, Col, Descriptions, Flex, Input, Pagination, Row, Spin, Table, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -22,51 +22,13 @@ const TripsList: React.FC = () => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const pageSize = 25;
 
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 425px)' });
 
     useEffect(() => {
         if (token) {
             dispatch(fetchTrips(token));
         }
     }, [token, dispatch]);
-
-    const handleLogout = () => {
-        dispatch(logout());
-    };
-
-    const handlePageChange = (page: number) => {
-        setCurrentPage(page);
-    };
-
-    const filteredTrips = trips.filter((trip: any) => {
-        const passengerNameMatches = trip.passengers.some((passenger: any) =>
-            passenger.name.toLowerCase().includes(filter.toLowerCase())
-        );
-        const passengerPhoneMatches = trip.passengers.some((passenger: any) =>
-            passenger.phone.includes(filter)
-        );
-        const statusMatches = trip.status.toString().includes(filter);
-        return passengerNameMatches || passengerPhoneMatches || statusMatches;
-    });
-
-    const paginatedTrips = filteredTrips.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-
-    const columns = [
-        { title: 'Заказ', dataIndex: 'order_id', key: 'order_id' },
-        { title: 'Статус', dataIndex: 'status', key: 'status', render: (status: number) => statusFormatter(status) },
-        { title: 'Имя пассажира', dataIndex: ['passengers', 0, 'name'], key: 'passenger_name' },
-        { title: 'Номер пассажира', dataIndex: ['passengers', 0, 'phone'], key: 'passenger_phone' },
-        {
-            title: '',
-            key: 'action',
-            render: (record: any) => (
-                <Button onClick={() => {
-                    setSelectedTrip(record);
-                    setDetailsVisible(true);
-                }}>Подробнее</Button>
-            ),
-        },
-    ];
 
     // Статусы заказа заменил на текстовый формат
     const statusFormatter = (status: number) => {
@@ -93,14 +55,60 @@ const TripsList: React.FC = () => {
         return statusText;
     }
 
+    const handleLogout = () => {
+        dispatch(logout());
+    };
+
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page);
+    };
+
+    const filteredTrips = trips.filter((trip: any) => {
+        const passengerNameMatches = trip.passengers.some((passenger: any) =>
+            passenger.name.toLowerCase().includes(filter.toLowerCase())
+        );
+        const passengerPhoneMatches = trip.passengers.some((passenger: any) =>
+            passenger.phone.includes(filter)
+        );
+        const statusMatches = statusFormatter(trip.status).toLowerCase().includes(filter.toLowerCase());
+        return passengerNameMatches || passengerPhoneMatches || statusMatches;
+    });
+
+    const paginatedTrips = filteredTrips.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    const columns = [
+        { title: 'Заказ', dataIndex: 'order_id', key: 'order_id' },
+        { title: 'Статус', dataIndex: 'status', key: 'status', render: (status: number) => statusFormatter(status) },
+        { title: 'Имя пассажира', dataIndex: ['passengers', 0, 'name'], key: 'passenger_name' },
+        { title: 'Номер пассажира', dataIndex: ['passengers', 0, 'phone'], key: 'passenger_phone' },
+        {
+            title: '',
+            key: 'action',
+            render: (record: any) => (
+                <Button
+                    type='link'
+                    className='actionButton'
+                    onClick={() => {
+                        setSelectedTrip(record);
+                        setDetailsVisible(true);
+                    }}>О заказе</Button>
+            ),
+        },
+    ];
+
     return (
         <div className='xl-container trips-row'>
             <Row justify="center">
                 <Col span={24}>
                     <Card className="trips-card">
-                        <Title level={2} className="trips-title">Список поездок</Title>
+                        <Flex className='card-header' justify="space-between" align="center">
+                            <Title level={2} className="trips-title">Список поездок</Title>
+                            <Button type="link" onClick={handleLogout} className='logout-button'>
+                                <LogoutOutlined /> Выйти из аккаунта
+                            </Button>
+                        </Flex>
                         <Input
-                            placeholder="Фильтр по имени, идентификатору заказа, идентификатору пользователя или статусу"
+                            placeholder="🔍 Фильтр по имени или номеру пассажира, статусу"
                             value={filter}
                             onChange={(e) => setFilter(e.target.value)}
                             className="trips-filter"
@@ -131,7 +139,7 @@ const TripsList: React.FC = () => {
                                                 onClick={() => {
                                                     setSelectedTrip(trip);
                                                     setDetailsVisible(true);
-                                                }}>Подробнее</Button>
+                                                }}>О заказе</Button>
                                         </Card>
                                     ))}
                                 </div>
@@ -171,9 +179,6 @@ const TripsList: React.FC = () => {
                     </Card>
                 </Col>
             </Row>
-            <Button type="primary" onClick={handleLogout} className='logout-button'>
-                Выйти из аккаунта <LogoutOutlined />
-            </Button>
         </div>
     );
 };
