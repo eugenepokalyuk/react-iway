@@ -19,4 +19,8 @@
 
 .login-card form {
     min-width: 300px;
+
+    @media screen and (max-width: 425px) {
+        min-width: 250px;
+    }
 }
