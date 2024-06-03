@@ -13,3 +13,16 @@ body {
 .table-overflow {
     overflow-x: auto;
 }
+
+@font-face {
+    font-family: "ALS Gorizont Expanded Regular";
+    src: url(./assets/fonts/gorizont/gorizont-font.eot.ttf);
+    src: url(./assets/fonts/gorizont/gorizont-font.eot.ttf), url(./assets/fonts/gorizont/gorizont-font.eot.woff), url(./assets/fonts/gorizont/gorizont-font.eot.woff2);
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: "ALS Gorizont Expanded Regular" !important;
+}
